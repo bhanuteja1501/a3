@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ABC Bank</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+
+      <div class="left header" onload="userAge()">
+        <img src="logo.png" alt="ABC_logo">
+        <div id="date" class="right" onload="time()">
+        </div>
+      </div>
+
+
+<div class="form">
+  <form id="form" action="page2.html" >
+
+    <h1>Registration Form</h1>
+    <div class="formcontainer">
+    <hr/>
+     <div class="container">
+          <label for="uname"><strong>Name</strong></label>
+          <input id="name" type="text" placeholder="Enter name" name="uname" required>
+          <label for="psw"><strong>Father Name</strong></label>
+          <input id="fname" type="text" placeholder="Enter Father Name" name="psw" required>
+          <label for="psw"><strong>Date of Birth</strong></label>
+          <input id="dob" type="date" name="psw" required>
+          <label for="psw"><strong>Pan Number</strong></label>
+          <input id="pnum" type="text" placeholder="Enter 10 digit Pan Number" name="psw" required minlength="10" maxlength="10">
+          <label for="psw"><strong>Aadhaar Number</strong></label>
+          <input id="anum" type="text" placeholder="Enter 12 digit adhaar Number" name="psw" required minlength="12" maxlength="12">
+          <label for="psw"><strong>Mobile Number</strong></label>
+          <input id="mnum" type="text" placeholder="Enter Mobile Number" name="psw" required maxlength="10" maxlength="10">
+          <label for="psw"><strong>Address </strong></label>
+          <input id="add" type="textbox" placeholder="" name="psw" required>
+          <div class="checkbox">
+            <input class="ic"type="checkbox" name="checkbox" required>
+            <label class="lc"for="checkbox">I agree <a href="#" target="_blank" onclick="toggle()">terms and conditions.</a> </label>
+         </div>
+  </div>
+  <button style="background-color:green" type="submit" onclick="getValues() "> Submit </button>
+  <button type="reset"> Clear </button>
+  </form>
+</div>
+</div>
+<
+
+    <script>
+
+    // toggle a target
+    function toggle() {
+      var x =false;
+      var toggle= function() {
+        x=true;
+      }
+      var check = function () {
+        if (x==false){
+          window.alert("Please read terms & conditions")
+        }
+      }
+    }
+
+//time function
+    function time(){
+        var d = new Date();
+        var dy = d.getDate();
+        var mm = d.getMonth()+1;
+        var y = d.getFullYear();
+        var s = d.getSeconds();
+        var m = d.getMinutes();
+        var h = d.getHours();
+        var day = d.getDay();
+        var df = dy+"-"+mm+"-"+y;
+
+
+        const week = [" Sunday "," Monday ", " Tuesday ", " Wednesday "," Thursday "," Friday "," Saturday ",];
+        if (0<h<12) {
+
+          var ap= "AM";
+        }
+        else if (h=0) {
+          var h=12;
+          var ap= "AM";
+        }
+        else {
+          var hr = h-12;
+          var ap="PM";
+        }
+        var t = h+ ":" + m + ":" + s;
+        document.getElementById("date").innerHTML=df+", "+week[day]+", "+t+" "+ap ;
+    }
+    setInterval(time,1000);
+
+
+
+// Values handler
+        function getValues(){
+          var name =document.getElementById("name").value;
+          var fname =document.getElementById("fname").value;
+          var dob =document.getElementById("dob").value;
+          var pnum =document.getElementById("pnum").value;
+          var anum =document.getElementById("anum").value;
+          var mnum =document.getElementById("mnum").value;
+          var add =document.getElementById("add").value;
+
+          localStorage.setItem("value1", name);
+          localStorage.setItem("V2", fname);
+
+          localStorage.setItem("V4", pnum);
+          localStorage.setItem("V5", anum);
+          localStorage.setItem("V6", mnum);
+          localStorage.setItem("V7", add);
+
+          //age checking
+          var userinput = localStorage.getItem("V3");
+           var dob = new Date(userinput);
+
+           //calculate month difference from current date in time
+           var month_diff = Date.now() - dob.getTime();
+
+           //convert the calculated difference in date format
+           var age_dt = new Date(month_diff);
+
+           //extract year from date
+           var year = age_dt.getUTCFullYear();
+
+           //now calculate the age of the user
+           var age = Math.abs(year - 1970);
+
+           //display the calculated age
+       document.getElementById("dob1").innerHTML =age + " years"+age_dt;
+
+
+       if (age<18) {
+            document.getElementById("form").action = "alert.html";
+       }
+       else {
+           document.getElementById("form").action = "page2.html";
+
+          }
+        }
+  // clear function
+        function clrValues(){
+          localStorage.clear();
+
+            document.getElementById("name").innerHTML="";
+            document.getElementById("Fname").innerHTML="";
+            document.getElementById("dob").innerHTML="";
+            document.getElementById("pnum").innerHTML="";
+            document.getElementById("anum").innerHTML="";
+            document.getElementById("mnum").innerHTML="";
+            document.getElementById("add").innerHTML="";
+          }
+
+            var dob =document.getElementById("dob").value;
+            var todayDate = new Date().getMilliseconds;
+            var birthDateSplit = document.getElementById("dob").split('-');
+            var birthDate = new Date(birthDateSplit[2],birthDateSplit[1],birthDateSplit[0]);
+            var day = birthDate[2]*86400000;
+            var month = birthDate[1]*2629746000;
+            var year = birthDate[0]*31556952000;
+            var age = todayDate - (day + month + year);
+
+              localStorage.setItem("V3", age);
+
+    </script>
+  </body>
+</html>
