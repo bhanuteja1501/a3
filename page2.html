@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Confirm Survey form</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .btnStack,
+    button {
+      font-family: Oswald;
+      background-color: orange;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 1.428571429;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+
+    a.btnStack:hover,
+    button:hover {
+      background-color: #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="left header">
+    <img src="logo.png" alt="ABC_logo">
+    <div id="date" class="right" onload="time()">
+    </div>
+  </div>
+
+  <form style="margin:auto">
+    <h1>Confirm Your Details</h1><br>
+    <div class="formcontainer">
+      <hr />
+      <div class="container">
+        <label for="uname"><strong>Name : <span id="name1"></span></h3></strong></label><br><br>
+
+        <label for="psw"><strong>Father Name : <span id="fname1"></span></strong></label><br><br>
+
+        <label for="psw"><strong>Age : <span id="dob1"></span></strong></label><br><br>
+
+        <label for="uname"><strong>Pan Number : <span id="pnum1"></span></h3></strong></label><br><br>
+
+        <label for="psw"><strong>Aadhaar Number : <span id="anum1"></span></strong></label><br><br>
+
+        <label for="psw"><strong>Mobile Number : <span id="mnum1"></span></strong></label><br><br>
+
+        <label for="psw"><strong>Address : <span id="add1"></span></strong></label><br><br>
+
+      </div>
+  </form>
+  <p>Please verify your data before submitting</p>
+
+  <a href="javascript:history.back()" class="btnStack"> Back </a>
+  <a href="page3.html" style="background-color:green" class="btnStack"> Confirm </a>
+  <script>
+    function time() {
+      var d = new Date();
+      var dy = d.getDate();
+      var mm = d.getMonth() + 1;
+      var y = d.getFullYear();
+      var s = d.getSeconds();
+      var m = d.getMinutes();
+      var h = d.getHours();
+      var day = d.getDay();
+      var df = dy + "-" + mm + "-" + y;
+      var t = h + ":" + m + ":" + s;
+      const week = [" Sunday ", " Monday ", " Tuesday ", " Wednesday ", " Thursday ", " Friday ", " Saturday ", ];
+      if (h < 12) {
+        var ap = "AM";
+      } else {
+        var ap = "PM";
+      }
+      document.getElementById("date").innerHTML = df + ", " + week[day] + ", " + t + " " + ap;
+    }
+    setInterval(time, 1000);
+
+
+
+    document.getElementById("name1").innerHTML = localStorage.getItem("V1");
+    document.getElementById("fname1").innerHTML = localStorage.getItem("V2");
+    //document.getElementById("dob1").innerHTML=localStorage.getItem("V3");
+    document.getElementById("add1").innerHTML = localStorage.getItem("V7");
+
+    var pnum = localStorage.getItem("V4");
+    var pnum2 = pnum.slice(0,2) + "******" + pnum.slice(8,10);
+    document.getElementById("pnum1").innerHTML = pnum2;
+
+    var anum = localStorage.getItem("V5");
+    var anum2 = anum.slice(0,2) + "********" + anum.slice(8,13);
+    document.getElementById("anum1").innerHTML = anum2;
+
+    var mnum = localStorage.getItem("V6");
+    var mnum2 = "+91-********" + mnum.slice(8,10);
+    document.getElementById("mnum1").innerHTML = mnum2;
+
+
+
+    //age clac
+    var date=new Date();
+    var age =date.getFullYear()-localStorage.getItem("V3").slice(0,4);
+    //display the calculated age
+    document.getElementById("dob1").innerHTML = age + " years";
+  </script>
+</body>
+
+</html>
