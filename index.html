@@ -107,7 +107,7 @@
       var date=new Date();
       var age =date.getFullYear()-document.getElementById("dob").value.slice(0,4);
       if (age<18){
-        alert("minor");
+        alert("You are not eligible as you are minor");
         e.preventDefault();
       }else if (x==false) {
         alert('Please read terms & Conditions');
